@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: gmall-coupon
+
+  # MySQL configuration
+  datasource:
+    # Fully qualified name of the connection pool implementation to use.
+    # By default, it is auto-detected from the classpath.
+    type: com.alibaba.druid.pool.DruidDataSource
+    # Fully qualified name of the JDBC driver.
+    # Auto-detected based on the URL by default.
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/gulimall_sms?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+
+# MyBatis-plus Configuration
+mybatis-plus:
+  # Locations of MyBatis mapper files.
+  mapper-locations: classpath:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+
+# Server HTTP
+server:
+  port: 10000
