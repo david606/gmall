@@ -2,6 +2,12 @@ spring:
   application:
     name: gmall-ware
 
+  # Nacos Config
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
   # MySQL configuration
   datasource:
     # Fully qualified name of the connection pool implementation to use.

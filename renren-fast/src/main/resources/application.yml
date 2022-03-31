@@ -1,15 +1,11 @@
-# Tomcat
-server:
-  tomcat:
-    uri-encoding: UTF-8
-    max-threads: 1000
-    min-spare-threads: 30
-  port: 15000
-  connection-timeout: 5000ms
-  servlet:
-    context-path: /renren-fast
-
 spring:
+  application:
+    name: renren-fast
+  cloud:
+     nacos:
+       discovery:
+         server-addr: 127.0.0.1:8848
+
   # 环境 dev|test|prod
   profiles:
     active: dev
@@ -37,6 +33,9 @@ spring:
         min-idle: 5       # 连接池中的最小空闲连接
   mvc:
     throw-exception-if-no-handler-found: true
+
+
+
 #  resources:
 #    add-mappings: false
 
@@ -61,6 +60,17 @@ mybatis-plus:
     call-setters-on-nulls: true
     jdbc-type-for-null: 'null'
 
+# Tomcat
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    threads:
+      max: 1000
+      min-spare: 30
+  port: 15000
+  #  connection-timeout: 5000ms
+  servlet:
+    context-path: /renren-fast
 
 renren:
   redis:

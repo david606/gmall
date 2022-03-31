@@ -1,6 +1,7 @@
 package org.sirius.gmall.coupon.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,6 @@ import org.sirius.gmall.coupon.entity.CouponEntity;
 import org.sirius.gmall.coupon.service.CouponService;
 import org.sirius.common.utils.PageUtils;
 import org.sirius.common.utils.R;
-
 
 
 /**
@@ -34,7 +34,7 @@ public class CouponController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
+    public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = couponService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -45,8 +45,8 @@ public class CouponController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    public R info(@PathVariable("id") Long id){
-		CouponEntity coupon = couponService.getById(id);
+    public R info(@PathVariable("id") Long id) {
+        CouponEntity coupon = couponService.getById(id);
 
         return R.ok().put("coupon", coupon);
     }
@@ -55,8 +55,8 @@ public class CouponController {
      * 保存
      */
     @RequestMapping("/save")
-    public R save(@RequestBody CouponEntity coupon){
-		couponService.save(coupon);
+    public R save(@RequestBody CouponEntity coupon) {
+        couponService.save(coupon);
 
         return R.ok();
     }
@@ -65,8 +65,8 @@ public class CouponController {
      * 修改
      */
     @RequestMapping("/update")
-    public R update(@RequestBody CouponEntity coupon){
-		couponService.updateById(coupon);
+    public R update(@RequestBody CouponEntity coupon) {
+        couponService.updateById(coupon);
 
         return R.ok();
     }
@@ -75,10 +75,25 @@ public class CouponController {
      * 删除
      */
     @RequestMapping("/delete")
-    public R delete(@RequestBody Long[] ids){
-		couponService.removeByIds(Arrays.asList(ids));
+    public R delete(@RequestBody Long[] ids) {
+        couponService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
+    }
+
+    /**
+     * 远程调用测试： 获取会员下优惠券列表
+     *
+     * @return R 全系统的所有返回都返回R
+     */
+    @RequestMapping("/member/list")
+    public R memberCoupons() {
+        // 应该去数据库查用户对于的优惠券
+        // 但这个我们简化了，不去数据库查，构造了一个优惠券给他返回
+        CouponEntity couponEntity = new CouponEntity();
+        couponEntity.setCouponName("满100-10");
+
+        return R.ok().put("coupons", List.of(couponEntity));
     }
 
 }
