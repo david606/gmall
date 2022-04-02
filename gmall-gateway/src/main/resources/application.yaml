@@ -1,0 +1,63 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+#        - id: test_route
+#          uri: https://www.baidu.com
+#          predicates:
+#            - Query=uri,baidu
+
+        # 商品服务路由
+        - id: product_route
+          uri: lb://gmall-product
+          predicates:
+            - Path=/api/product/**
+          filters:
+            # 将 api/product/** 重写成 product/**
+            - RewritePath=/api/product(?<segment>.*),/product$\{segment}
+
+        # 优惠营销服务路由
+        - id: coupon_route
+          uri: lb://gmall-coupon
+          predicates:
+            - Path=/api/coupon/**
+          filters:
+            - RewritePath=/api/coupon(?<segment>.*),/coupon$\{segment}
+
+        # 会员服务路由
+        - id: member_route
+          uri: lb://gmall-member
+          predicates:
+            - Path=/api/member/**
+          filters:
+            - RewritePath=/api/member(?<segment>.*),/member$\{segment}
+
+        # 订单服务路由
+        - id: order_route
+          uri: lb://gmall-order
+          predicates:
+            - Path=/api/order/**
+          filters:
+            - RewritePath=/api/order(?<segment>.*),/order$\{segment}
+
+        # 仓库服务路由
+        - id: ware_route
+          uri: lb://gmall-ware
+          predicates:
+            - Path=/api/ware/**
+          filters:
+            - RewritePath=/api/ware(?<segment>.*),/ware$\{segment}
+
+        # 管理系统后台服务
+        - id: admin_route
+          uri: lb://renren-fast
+          predicates:
+            - Path=/api/**
+          filters:
+            # 将 api/** 重写成 renren-fast/**
+            - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment}
+
+# 配置规则：精确在前，模糊在后
+# /api/** ：以些为前缀的路径，是由管理系统前端（VUE）请求过来的。
+
+

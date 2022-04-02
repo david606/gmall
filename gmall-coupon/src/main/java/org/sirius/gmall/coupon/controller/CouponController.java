@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,11 +26,28 @@ import org.sirius.common.utils.R;
  * @email my_good_dream@126.com
  * @date 2022-03-30 16:17:32
  */
+//@RefreshScope
 @RestController
 @RequestMapping("coupon/coupon")
 public class CouponController {
+
     @Autowired
     private CouponService couponService;
+
+    /**
+     * 测试 Nacos 配置中心：配置在配置中心的 gmall-coupon.properties
+     * coupon.user.name=David
+     * coupon.user.salary=50
+     */
+//    @Value("${coupon.user.name}")
+//    private String name;
+//    @Value("${coupon.user.salary}")
+//    private Double age;
+//
+//    @RequestMapping("/test/nacosconfig")
+//    public R testNacosConfig() {
+//        return R.ok().put("name", name).put("age", age);
+//    }
 
     /**
      * 列表
