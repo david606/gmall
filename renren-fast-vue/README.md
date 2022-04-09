@@ -17,3 +17,11 @@
 
 ## 更新日志
 每个版本的详细更改都记录在[release notes](https://github.com/renrenio/renren-fast-vue/releases)中。
+
+## Install Pubsub-js
+```JavaScript
+查看是否安装
+npm info pusub-js
+# 安装
+npm install --save pubsub-js
+```

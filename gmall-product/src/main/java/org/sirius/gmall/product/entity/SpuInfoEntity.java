@@ -1,5 +1,6 @@
 package org.sirius.gmall.product.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -38,11 +39,16 @@ public class SpuInfoEntity implements Serializable {
 	 */
 	private Long catalogId;
 	/**
+	 * 品牌名
+	 */
+	@TableField(exist = false)
+	private String brandName;
+	/**
 	 * 品牌id
 	 */
 	private Long brandId;
 	/**
-	 * 
+	 * 重量
 	 */
 	private BigDecimal weight;
 	/**
@@ -50,11 +56,11 @@ public class SpuInfoEntity implements Serializable {
 	 */
 	private Integer publishStatus;
 	/**
-	 * 
+	 * 创建时间
 	 */
 	private Date createTime;
 	/**
-	 * 
+	 * 更新时间
 	 */
 	private Date updateTime;
 

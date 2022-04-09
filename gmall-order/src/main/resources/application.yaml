@@ -30,4 +30,4 @@ mybatis-plus:
 
 # Server HTTP
 server:
-  port: 12000
+  port: 14000

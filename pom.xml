@@ -20,6 +20,11 @@
     <module>gmall-gateway</module>
     <module>renren-fast</module>
     <module>renren-generator</module>
+      <module>gmall-search</module>
+      <module>gmall-third-party</module>
+      <module>gmall-cart</module>
+    <module>gmall-auth-server</module>
+    <module>gmall-seckill</module>
   </modules>
 
 </project>

@@ -1,0 +1,31 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+  application:
+    name: gmall-third-party
+
+  aliyun:
+    sms:
+      host: https://smssend.shumaidata.com
+      path: /sms/send
+      method: POST
+      template: M09DD535F4
+      app-code: 4a9119fb76f24a228d6d7bc3b8527bdd
+
+server:
+  port: 9999
+
+alibaba:
+  cloud:
+    access-key: LTAI4G5hhxdVaeE9GUv7HZTs
+    secret-key: W6Mk6QPI3jVx24cMRWHRvez6GcVe3Q
+    bucket: goldenmall
+    oss:
+      endpoint: oss-cn-beijing.aliyuncs.com
+
+logging:
+  level:
+    org.sirius.gmall.thirdparty: debug

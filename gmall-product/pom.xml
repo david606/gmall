@@ -11,10 +11,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>gmall-product</artifactId>
+    <description>商品服务</description>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <spring.cloud.alibaba.version>2.2.7.RELEASE</spring.cloud.alibaba.version>
         <spring.cloud.version>Hoxton.SR12</spring.cloud.version>
     </properties>
 
@@ -24,20 +26,82 @@
             <artifactId>gmall-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- 引入远程调用 OpenFeign -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+
+        <!-- 引入做为分布式锁 -->
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>3.17.0</version>
+        </dependency>
+
+        <!-- SpringSession　使用　Redis -->
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-redis</artifactId>
+        </dependency>
+
+        <!--        <dependency>-->
+        <!--            <groupId>com.alibaba.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-starter-alibaba-seata</artifactId>-->
+        <!--            <version>2021.1</version>-->
+        <!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
         <dependencies>
+            <!-- Spring Cloud Alibaba  -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring.cloud.alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <!--Spring Cloud Hoxton.SR12-->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>

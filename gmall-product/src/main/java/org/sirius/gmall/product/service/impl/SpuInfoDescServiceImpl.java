@@ -13,6 +13,9 @@ import org.sirius.gmall.product.entity.SpuInfoDescEntity;
 import org.sirius.gmall.product.service.SpuInfoDescService;
 
 
+/**
+ * @author david
+ */
 @Service("spuInfoDescService")
 public class SpuInfoDescServiceImpl extends ServiceImpl<SpuInfoDescDao, SpuInfoDescEntity> implements SpuInfoDescService {
 
@@ -24,6 +27,11 @@ public class SpuInfoDescServiceImpl extends ServiceImpl<SpuInfoDescDao, SpuInfoD
         );
 
         return new PageUtils(page);
+    }
+
+    @Override
+    public void saveSpuInfoDesc(SpuInfoDescEntity spuInfoDescEntity) {
+        this.baseMapper.insert(spuInfoDescEntity);
     }
 
 }

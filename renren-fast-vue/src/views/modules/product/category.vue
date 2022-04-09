@@ -129,6 +129,7 @@ export default {
             method: "post",
             data: this.$http.adornData(catIds, false)
           }).then(({ data }) => {
+            console.log(data)
             this.$message({
               message: "菜单批量删除成功",
               type: "success"

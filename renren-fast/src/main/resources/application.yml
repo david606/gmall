@@ -67,7 +67,7 @@ server:
     threads:
       max: 1000
       min-spare: 30
-  port: 15000
+  port: 8899
   #  connection-timeout: 5000ms
   servlet:
     context-path: /renren-fast

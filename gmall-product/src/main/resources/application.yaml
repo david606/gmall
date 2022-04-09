@@ -8,6 +8,14 @@ spring:
       discovery:
         server-addr: 127.0.0.1:8848
 
+  # redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+
   # MySQL configuration
   datasource:
     # Fully qualified name of the connection pool implementation to use.
@@ -16,7 +24,7 @@ spring:
     # Fully qualified name of the JDBC driver.
     # Auto-detected based on the URL by default.
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/gulimall_pms?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/gulimall_pms?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
     username: root
     password: root
 
@@ -27,7 +35,15 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto
+      # logic delete
+      logic-delete-value: 0
+      logic-not-delete-value: 1
 
 # Server HTTP
 server:
-  port: 13000
+  port: 15000
+
+
+logging:
+  level:
+    org.sirius.gmall.product: debug

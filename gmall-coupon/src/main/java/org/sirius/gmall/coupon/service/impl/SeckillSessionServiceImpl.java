@@ -11,6 +11,7 @@ import org.sirius.common.utils.Query;
 import org.sirius.gmall.coupon.dao.SeckillSessionDao;
 import org.sirius.gmall.coupon.entity.SeckillSessionEntity;
 import org.sirius.gmall.coupon.service.SeckillSessionService;
+import org.springframework.util.StringUtils;
 
 
 @Service("seckillSessionService")
@@ -18,9 +19,17 @@ public class SeckillSessionServiceImpl extends ServiceImpl<SeckillSessionDao, Se
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
+        QueryWrapper<SeckillSessionEntity> queryWrapper = new QueryWrapper<>();
+
+        String key = (String) params.get("key");
+
+        if (!StringUtils.isEmpty(key)) {
+            queryWrapper.eq("id",key);
+        }
+
         IPage<SeckillSessionEntity> page = this.page(
                 new Query<SeckillSessionEntity>().getPage(params),
-                new QueryWrapper<SeckillSessionEntity>()
+                queryWrapper
         );
 
         return new PageUtils(page);

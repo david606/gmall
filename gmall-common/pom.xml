@@ -9,12 +9,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>gmall-common</artifactId>
+    <description>每一个微服务公共的依赖，bean，工具类等</description>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <!-- 统一管理版本号 -->
-        <mysql.versionn>8.0.17</mysql.versionn>
+        <mysql.versionn>8.0.28</mysql.versionn>
         <mybatis.plus.version>3.5.1</mybatis.plus.version>
         <druid.version>1.2.8</druid.version>
         <lombok.version>1.18.22</lombok.version>
@@ -23,12 +24,13 @@
     </properties>
 
     <dependencies>
-        <!-- mybatisPLUS-->
+        <!-- mybatis plus -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatis.plus.version}</version>
         </dependency>
+
         <!-- 数据库驱动 https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
@@ -61,17 +63,22 @@
             <version>${lombok.version}</version>
         </dependency>
 
-        <!-- httpcomponent包。发送http请求 -->
+        <!-- HttpCore是一套低级别的HTTP传输组件，可以用来建立自定义的客户端和服务器端的HTTP服务，而且占用的空间最小。-->
+        <!-- HttpCore支持两种I/O模型：基于经典Java I/O的阻塞I/O模型和基于Java NIO的非阻塞、事件驱动I/O模型。-->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpcore</artifactId>
             <version>4.4.15</version>
         </dependency>
+
+        <!-- API提供了大量的辅助工具，特别是字符串操作方法、基本数字方法、对象反射、并发、创建和序列化以及系统属性。-->
+        <!-- 此外，它还包含了对java.util.Date的基本增强，以及一系列专门用于帮助构建方法的实用程序，如hashCode、toString和equals。-->
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
         </dependency>
+
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
@@ -85,6 +92,41 @@
             <version>4.0.1</version>
             <scope>compile</scope>
         </dependency>
+
+        <!-- Bean Validation API -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.1.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.80</version>
+        </dependency>
+
+        <!--        <dependency>-->
+        <!--            <groupId>org.eclipse.jetty</groupId>-->
+        <!--            <artifactId>jetty-util</artifactId>-->
+        <!--            <version>11.0.8</version>-->
+        <!--        </dependency>-->
+
+        <!--        <dependency>-->
+        <!--            <groupId>com.alibaba.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>-->
+        <!--        </dependency>-->
+
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-starter-sleuth</artifactId>-->
+        <!--        </dependency>-->
+
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-starter-zipkin</artifactId>-->
+        <!--        </dependency>-->
+
     </dependencies>
 
     <dependencyManagement>

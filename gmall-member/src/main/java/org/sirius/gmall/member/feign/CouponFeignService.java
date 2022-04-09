@@ -14,7 +14,7 @@ public interface CouponFeignService {
 
     /**
      * 远程调用测试： 获取会员下优惠券列表
-     *
+     * @return
      */
     @RequestMapping("/coupon/coupon/member/list")
     public R memberCoupons();

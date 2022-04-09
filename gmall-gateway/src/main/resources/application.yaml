@@ -2,13 +2,17 @@ spring:
   cloud:
     gateway:
       routes:
-#        - id: test_route
-#          uri: https://www.baidu.com
-#          predicates:
-#            - Query=uri,baidu
+        #        - id: test_route
+        #          uri: https://www.baidu.com
+        #          predicates:
+        #            - Query=uri,baidu
+
+        # ***************************************************************************** #
+        # ============================ 管理系统前端网关配置　==============================　#
+        # ***************************************************************************** #
 
         # 商品服务路由
-        - id: product_route
+        - id: admin_product_route
           uri: lb://gmall-product
           predicates:
             - Path=/api/product/**
@@ -17,7 +21,7 @@ spring:
             - RewritePath=/api/product(?<segment>.*),/product$\{segment}
 
         # 优惠营销服务路由
-        - id: coupon_route
+        - id: admin_coupon_route
           uri: lb://gmall-coupon
           predicates:
             - Path=/api/coupon/**
@@ -25,7 +29,7 @@ spring:
             - RewritePath=/api/coupon(?<segment>.*),/coupon$\{segment}
 
         # 会员服务路由
-        - id: member_route
+        - id: admin_member_route
           uri: lb://gmall-member
           predicates:
             - Path=/api/member/**
@@ -33,7 +37,7 @@ spring:
             - RewritePath=/api/member(?<segment>.*),/member$\{segment}
 
         # 订单服务路由
-        - id: order_route
+        - id: admin_order_route
           uri: lb://gmall-order
           predicates:
             - Path=/api/order/**
@@ -41,12 +45,20 @@ spring:
             - RewritePath=/api/order(?<segment>.*),/order$\{segment}
 
         # 仓库服务路由
-        - id: ware_route
+        - id: admin_ware_route
           uri: lb://gmall-ware
           predicates:
             - Path=/api/ware/**
           filters:
             - RewritePath=/api/ware(?<segment>.*),/ware$\{segment}
+
+        # 第三方服务路由
+        - id: admin_third-party-route
+          uri: lb://gmall-third-party
+          predicates:
+            - Path=/api/thirdparty/**
+          filters:
+            - RewritePath=/api/thirdparty(?<segment>.*),/thirdparty$\{segment}
 
         # 管理系统后台服务
         - id: admin_route
@@ -57,7 +69,53 @@ spring:
             # 将 api/** 重写成 renren-fast/**
             - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment}
 
-# 配置规则：精确在前，模糊在后
-# /api/** ：以些为前缀的路径，是由管理系统前端（VUE）请求过来的。
+        # ***************************************************************************** #
+        # ============================= 商城前端网关配置　＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝  #
+        # ***************************************************************************** #
 
+        # 商品路由
+        - id: gmall_host_route
+          uri: lb://gmall-product
+          predicates:
+            - Host=gmall.com,item.gmall.com
+
+        # 搜索路由
+        - id: gmall_search_route
+          uri: lb://gmall-search
+          predicates:
+            - Host=search.gmall.com
+
+        # 认证系统
+        - id: gmall_auth_route
+          uri: lb://gmall-auth-server
+          predicates:
+            - Host=auth.gmall.com
+
+        # 购物车路由
+        - id: gmall_cart_route
+          uri: lb://gmall-cart
+          predicates:
+            - Host=cart.gmall.com
+
+        # 订单路由
+        - id: gmall_order_route
+          uri: lb://gmall-order
+          predicates:
+            - Host=order.gmall.com
+
+        # 会员路由
+        - id: gmall_member_route
+          uri: lb://gmall-member
+          predicates:
+            - Host=member.gmall.com
+
+        # 秒杀路由
+        - id: gmall_seckill_route
+          uri: lb://gmall-seckill
+          predicates:
+            - Host=seckill.gmall.com
+
+# 配置原则：精确在前，模糊在后
+# --管理系统路由：/api/** 为前缀的路径，是管理系统前端（VUE）的请求
+# --商城系统路由：通过　Host 匹配.
 

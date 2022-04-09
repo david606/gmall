@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: gmall-seckill
+
+  # Nacos Config
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+
+# Server HTTP
+server:
+  port: 17000
