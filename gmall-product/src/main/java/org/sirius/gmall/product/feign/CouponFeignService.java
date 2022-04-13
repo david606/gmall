@@ -25,7 +25,7 @@ public interface CouponFeignService {
      */
 
     /**
-     * //TODO 积分？
+     * 积分
      *
      * @param spuBoundTo
      * @return

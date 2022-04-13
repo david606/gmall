@@ -9,8 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2022/4/7 下午9:04
  */
 @SpringBootApplication
-public class AuthServerApplication {
+public class GmallAuthServerApplication {
     public static void main(String[] args) {
-        SpringApplication.run(AuthServerApplication.class, args);
+        SpringApplication.run(GmallAuthServerApplication.class, args);
     }
 }

@@ -1,20 +1,17 @@
 package org.sirius.gmall.product.service.impl;
 
-import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.commons.lang.StringUtils;
 import org.sirius.common.utils.PageUtils;
 import org.sirius.common.utils.Query;
-import org.sirius.common.utils.R;
 import org.sirius.gmall.product.dao.SkuInfoDao;
 import org.sirius.gmall.product.entity.SkuImagesEntity;
 import org.sirius.gmall.product.entity.SkuInfoEntity;
 import org.sirius.gmall.product.entity.SpuInfoDescEntity;
 import org.sirius.gmall.product.feign.SeckillFeignService;
 import org.sirius.gmall.product.service.*;
-import org.sirius.gmall.product.vo.SeckillSkuVo;
 import org.sirius.gmall.product.vo.SkuItemSaleAttrVo;
 import org.sirius.gmall.product.vo.SkuItemVo;
 import org.sirius.gmall.product.vo.SpuItemAttrGroupVo;
@@ -56,10 +53,7 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        IPage<SkuInfoEntity> page = this.page(
-                new Query<SkuInfoEntity>().getPage(params),
-                new QueryWrapper<SkuInfoEntity>()
-        );
+        IPage<SkuInfoEntity> page = this.page(new Query<SkuInfoEntity>().getPage(params), new QueryWrapper<SkuInfoEntity>());
         return new PageUtils(page);
     }
 
@@ -112,10 +106,7 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
 
         }
 
-        IPage<SkuInfoEntity> page = this.page(
-                new Query<SkuInfoEntity>().getPage(params),
-                queryWrapper
-        );
+        IPage<SkuInfoEntity> page = this.page(new Query<SkuInfoEntity>().getPage(params), queryWrapper);
 
         return new PageUtils(page);
     }
@@ -152,7 +143,7 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
         CompletableFuture<Void> descFuture = infoFuture.thenAcceptAsync((res) -> {
             // 4、获取spu的介绍    pms_spu_info_desc
             SpuInfoDescEntity spuInfoDescEntity = spuInfoDescService.getById(res.getSpuId());
-            skuItemVo.setDesc(spuInfoDescEntity);
+            skuItemVo.setDescription(spuInfoDescEntity);
         }, executor);
 
 
@@ -169,28 +160,30 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
             skuItemVo.setImages(imagesEntities);
         }, executor);
 
-        CompletableFuture<Void> seckillFuture = CompletableFuture.runAsync(() -> {
-            // 3、远程调用查询当前sku是否参与秒杀优惠活动
-            R skuSeckillInfo = secKillFeignService.getSkuSeckillInfo(skuId);
-
-            if (skuSeckillInfo.getCode() == 0) {
-                // 查询成功
-                SeckillSkuVo seckillInfoData = skuSeckillInfo.getData("data", new TypeReference<SeckillSkuVo>() {
-                });
-
-                skuItemVo.setSeckillSkuVo(seckillInfoData);
-
-                if (seckillInfoData != null) {
-                    long currentTime = System.currentTimeMillis();
-                    if (currentTime > seckillInfoData.getEndTime()) {
-                        skuItemVo.setSeckillSkuVo(null);
-                    }
-                }
-            }
-        }, executor);
+        // TODO 秒杀还没有完成，暂不开放
+//        CompletableFuture<Void> seckillFuture = CompletableFuture.runAsync(() -> {
+//            // 3、远程调用查询当前sku是否参与秒杀优惠活动
+//            R skuSeckillInfo = secKillFeignService.getSkuSeckillInfo(skuId);
+//
+//            if (skuSeckillInfo.getCode() == 0) {
+//                // 查询成功
+//                SeckillSkuVo seckillInfoData = skuSeckillInfo.getData("data", new TypeReference<SeckillSkuVo>() {
+//                });
+//
+//                skuItemVo.setSeckillSkuVo(seckillInfoData);
+//
+//                if (seckillInfoData != null) {
+//                    long currentTime = System.currentTimeMillis();
+//                    if (currentTime > seckillInfoData.getEndTime()) {
+//                        skuItemVo.setSeckillSkuVo(null);
+//                    }
+//                }
+//            }
+//        }, executor);
 
         // 等到所有任务都完成
-        CompletableFuture.allOf(saleAttrFuture, descFuture, baseAttrFuture, imageFuture, seckillFuture).get();
+//        CompletableFuture.allOf(saleAttrFuture, descFuture, baseAttrFuture, imageFuture, seckillFuture).get();
+        CompletableFuture.allOf(saleAttrFuture, descFuture, baseAttrFuture, imageFuture).get();
 
         return skuItemVo;
     }

@@ -4,12 +4,12 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
-import java.util.Date;
+
 import lombok.Data;
 
 /**
  * spu信息介绍
- * 
+ *
  * @author David
  * @email my_good_dream@126.com
  * @date 2022-03-30 15:00:46
@@ -27,6 +27,6 @@ public class SpuInfoDescEntity implements Serializable {
 	/**
 	 * 商品介绍
 	 */
-	private String desc;
+	private String description;
 
 }

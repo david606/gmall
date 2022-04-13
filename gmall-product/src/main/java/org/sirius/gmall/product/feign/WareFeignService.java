@@ -17,9 +17,10 @@ public interface WareFeignService {
 
     /**
      * 远程查询查询这批商品是否有库存
+     *
      * @param skuIds 一批商品
      * @return
      */
-    @PostMapping(value = "/ware/waresku/hasStock")
+    @PostMapping(value = "/ware/waresku/hasstock")
     R getSkuHasStock(@RequestBody List<Long> skuIds);
 }

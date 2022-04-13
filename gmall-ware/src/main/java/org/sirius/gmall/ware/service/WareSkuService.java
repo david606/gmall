@@ -3,7 +3,9 @@ package org.sirius.gmall.ware.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.sirius.common.utils.PageUtils;
 import org.sirius.gmall.ware.entity.WareSkuEntity;
+import org.sirius.gmall.ware.vo.SkuHasStockVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,5 +30,13 @@ public interface WareSkuService extends IService<WareSkuEntity> {
      * @param skuNum 商品数量
      */
     void addStock(Long skuId, Long wareId, Integer skuNum);
+
+    /**
+     * 查询每个Sku是否还有库存
+     *
+     * @param skuIds 要获取库存的 sku
+     * @return
+     */
+    List<SkuHasStockVo> getSkuHasStock(List<Long> skuIds);
 }
 

@@ -32,7 +32,7 @@ public class SkuItemVo {
     /**
      * 4、获取spu的介绍
      */
-    private SpuInfoDescEntity desc;
+    private SpuInfoDescEntity description;
 
     /**
      * 5、获取spu的规格参数信息

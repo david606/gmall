@@ -3,10 +3,12 @@ package org.sirius.gmall.ware.service.impl;
 import lombok.extern.slf4j.Slf4j;
 import org.sirius.common.utils.R;
 import org.sirius.gmall.ware.feign.ProductFeignService;
+import org.sirius.gmall.ware.vo.SkuHasStockVo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -76,6 +78,22 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> i
 
         // 插入库存信息
         wareSkuDao.insert(wareSkuEntity);
+    }
+
+    @Override
+    public List<SkuHasStockVo> getSkuHasStock(List<Long> skuIds) {
+        List<SkuHasStockVo> skuHasStockVos = skuIds.stream().map(skuId -> {
+            // 查询 sku 是否有库存
+            Long count = this.baseMapper.getSkuStock(skuId);
+            // 构建 vo
+            SkuHasStockVo skuHasStockVo = new SkuHasStockVo();
+            skuHasStockVo.setSkuId(skuId);
+            skuHasStockVo.setHasStock(count != null && count > 0);
+            return skuHasStockVo;
+
+        }).collect(Collectors.toList());
+
+        return skuHasStockVos;
     }
 
 }

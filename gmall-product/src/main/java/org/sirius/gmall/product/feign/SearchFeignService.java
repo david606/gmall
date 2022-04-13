@@ -22,6 +22,6 @@ public interface SearchFeignService {
      * @param skuEsModels
      * @return
      */
-    @PostMapping(value = "/search/save/product")
+    @PostMapping(value = "/search/product/save/esmodel")
     public R saveSpuEsModel(@RequestBody List<SkuEsModel> skuEsModels);
 }

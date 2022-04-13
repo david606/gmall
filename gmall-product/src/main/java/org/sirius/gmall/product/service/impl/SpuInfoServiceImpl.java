@@ -330,7 +330,7 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
         List<String> desc = vo.getDesc();
         SpuInfoDescEntity spuInfoDescEntity = new SpuInfoDescEntity();
         spuInfoDescEntity.setSpuId(spuId);
-        spuInfoDescEntity.setDesc(String.join(",", desc));
+        spuInfoDescEntity.setDescription(String.join(",", desc));
         spuInfoDescService.saveSpuInfoDesc(spuInfoDescEntity);
     }
 

@@ -10,3 +10,7 @@ spring:
 # Server HTTP
 server:
   port: 16000
+
+logging:
+  level:
+    org.sirius.gmall.search: debug
